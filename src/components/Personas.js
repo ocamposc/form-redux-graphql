@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
+import Persona from './Persona';
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getPersonasAction } from '../actions/personaActions';
 
 const Personas = () => {
@@ -9,12 +10,13 @@ const Personas = () => {
 
     useEffect(() => {
 
-
         // consultar la api
-        //const loadPersonas = () => dispatch(getPersonasAction());
-        //loadPersonas();
+        const loadPersonas = () => dispatch(getPersonasAction());
+        loadPersonas();
 
     }, [])
+
+    const personas = useSelector(state => state.personas.personas);
 
     return(
         <Fragment>
@@ -30,7 +32,14 @@ const Personas = () => {
                     </tr>
                 </thead>
                 <tbody>
-
+                    {personas.length === 0 ? 'No hay personas' : (
+                        personas.map(persona => (
+                            <Persona 
+                                key={persona.id}
+                                persona={persona}
+                            />
+                        ))
+                    )}
                 </tbody>
             </table>
         </Fragment>

@@ -1,27 +1,15 @@
-import ApolloClient from 'apollo-boost';
-
-const clientGQL = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-
-export default clientGQL; 
-
-
-
-  /*
-        const query = `
+const GET_PERSONAS = `
         {
             personas{
+                id
                 name
                 lastName
                 age
                 email
             }
         }`
-        */
 
-        /*
-        const query = `
+const ADD_PERSONA = `
         mutation{
             createPersona(
                 data:{
@@ -36,4 +24,8 @@ export default clientGQL;
                 lastName
             }
         }`
-        */
+
+module.exports = {
+    GET_PERSONAS,
+    ADD_PERSONA
+}

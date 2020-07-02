@@ -4,13 +4,17 @@ import {
     CREATE_PERSONA_ERROR,
     GET_PERSONAS,
     GET_PERSONAS_SUCCESS,
-    GET_PERSONAS_ERROR
+    GET_PERSONAS_ERROR,
+    DELETE_PERSONA,
+    DELETE_PERSONA_SUCCESS,
+    DELETE_PERSONA_ERROR
 } from '../types';
 
 const initialState = {
     personas: [],
     error: false,
     loading: false
+    //deletePersona: null
 }
 
 export default function(state = initialState, action) {
@@ -27,6 +31,7 @@ export default function(state = initialState, action) {
                 loading: false,
                 personas: [...state.personas, action.payload]
             }
+        case GET_PERSONAS_ERROR:
         case CREATE_PERSONA_ERROR:
             return {
                 ...state,
@@ -35,11 +40,10 @@ export default function(state = initialState, action) {
             }
         case GET_PERSONAS_SUCCESS:
             return {
-
-            }
-        case GET_PERSONAS_ERROR:
-            return {
-
+                ...state,
+                loading: false,
+                error: false,
+                personas: action.payload
             }
         default:
             return state;
