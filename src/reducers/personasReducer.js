@@ -7,14 +7,19 @@ import {
     GET_PERSONAS_ERROR,
     DELETE_PERSONA,
     DELETE_PERSONA_SUCCESS,
-    DELETE_PERSONA_ERROR
+    DELETE_PERSONA_ERROR,
+    GET_UPDATE_PERSONA,
+    UPDATE_PERSONA_SUCCESS,
+    UPDATE_PERSONA_ERROR
 } from '../types';
+import { act } from 'react-dom/test-utils';
 
 const initialState = {
     personas: [],
     error: false,
-    loading: false
-    //deletePersona: null
+    loading: false,
+    deletePersona: null,
+    updatePersona: null
 }
 
 export default function(state = initialState, action) {
@@ -31,8 +36,10 @@ export default function(state = initialState, action) {
                 loading: false,
                 personas: [...state.personas, action.payload]
             }
+        case DELETE_PERSONA_ERROR:
         case GET_PERSONAS_ERROR:
         case CREATE_PERSONA_ERROR:
+        case UPDATE_PERSONA_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -44,6 +51,30 @@ export default function(state = initialState, action) {
                 loading: false,
                 error: false,
                 personas: action.payload
+            }
+        case DELETE_PERSONA:
+            return {
+                ...state,
+                deletePersona: action.payload
+            }
+        case DELETE_PERSONA_SUCCESS:
+            return {
+                ...state,
+                personas: state.personas.filter(personas => personas.id !== state.deletePersona),
+                error:false,
+                deletePersona: null
+            }
+        case GET_UPDATE_PERSONA:
+            return {
+                ...state,
+                updatePersona: action.payload
+            }
+        case UPDATE_PERSONA_SUCCESS:
+            return {
+                ...state,
+                updatePersona: null,
+                personas: state.personas.map(persona => persona.id === action.payload.id ? persona = action.payload : persona)
+
             }
         default:
             return state;

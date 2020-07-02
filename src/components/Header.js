@@ -15,7 +15,7 @@ const Header = () => {
             <Link to={'/personas/new'} 
             className='btn btn-danger nuevo-post d-block -d-md-inline-block'
             >
-                Agregar Persona &#43;</Link>
+                Agregar Persona</Link>
         </nav>
     )
 }

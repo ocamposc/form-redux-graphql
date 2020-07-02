@@ -9,23 +9,6 @@ const GET_PERSONAS = `
             }
         }`
 
-const ADD_PERSONA = `
-        mutation{
-            createPersona(
-                data:{
-                    name:"Harry",
-                    lastName:"Potter",
-                    age:28,
-                    email:"h.potter@gmail.com"
-                }
-            )
-            {
-                name
-                lastName
-            }
-        }`
-
 module.exports = {
     GET_PERSONAS,
-    ADD_PERSONA
 }

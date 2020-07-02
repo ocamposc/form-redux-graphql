@@ -4,16 +4,13 @@ import Persona from './Persona';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPersonasAction } from '../actions/personaActions';
 
-const Personas = () => {
 
+const Personas = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-        // consultar la api
         const loadPersonas = () => dispatch(getPersonasAction());
         loadPersonas();
-
     }, [])
 
     const personas = useSelector(state => state.personas.personas);
@@ -34,10 +31,10 @@ const Personas = () => {
                 <tbody>
                     {personas.length === 0 ? 'No hay personas' : (
                         personas.map(persona => (
-                            <Persona 
+                            <Persona
                                 key={persona.id}
                                 persona={persona}
-                            />
+                                />
                         ))
                     )}
                 </tbody>

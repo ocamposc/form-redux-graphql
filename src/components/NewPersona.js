@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { createPersonaAction } from '../actions/personaActions';
 
@@ -7,10 +8,11 @@ const NewPersona = () => {
 
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [age, setAge] = useState(0);
+    const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
 
     const dispatch = useDispatch();
+    const history = useHistory();
     
     const addPersona = persona => dispatch(createPersonaAction(persona));
 
@@ -28,6 +30,8 @@ const NewPersona = () => {
             age,
             email
         });
+
+        history.push('/');
     }
 
     return(
